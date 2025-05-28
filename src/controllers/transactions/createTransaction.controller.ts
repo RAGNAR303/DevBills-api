@@ -9,6 +9,7 @@ const createTransaction = async (request: FastifyRequest, reply: FastifyReply): 
     return;
   }
   const result = createTransactionSchema.safeParse(request.body);
+
   // Validação dos dados
   if (!result.success) {
     const erroMessage = result.error.errors[0].message || "Validação inválida";

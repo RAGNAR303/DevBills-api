@@ -1,5 +1,3 @@
-
-
 generator client {
   provider = "prisma-client-js"
   
@@ -37,9 +35,9 @@ model Transaction {
   updatedAt       DateTime @updatedAt
 
 // relacinamento
-category  Category? @relation(fields: [categoryId] , references: [id])
-categoryId String  @db.ObjectId
 
+categoryId String  @db.ObjectId
+category  Category @relation(fields: [categoryId] , references: [id])
 
 @@index([userId ,date ])
 @@index([userId ,date , categoryId])
