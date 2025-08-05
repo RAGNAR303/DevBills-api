@@ -6,7 +6,9 @@ export const deleteTransaction = async (
   request: FastifyRequest<{ Params: DeleteTransactionParams }>,
   reply: FastifyReply,
 ): Promise<void> => {
-  const userId = "sdfsdff45a346AF4";
+ 
+  const userId = request.userId;
+
   const { id } = request.params;
 
   if (!userId) {
@@ -30,8 +32,7 @@ export const deleteTransaction = async (
     await prisma.transaction.delete({ where: { id } });
     reply.status(200).send({ message: "Transação deletada com sucesso" });
   } catch (error) {
-
-    request.log.error({message: "Erro ao deletar trasação"})
-    reply.status(500).send({error: "Erro interno do servidor, falha ao deletar transação"})
+    request.log.error({ message: "Erro ao deletar trasação" });
+    reply.status(500).send({ error: "Erro interno do servidor, falha ao deletar transação" });
   }
 };

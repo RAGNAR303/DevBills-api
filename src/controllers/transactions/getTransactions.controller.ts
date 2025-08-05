@@ -4,12 +4,17 @@ import type { FastifyReply, FastifyRequest } from "fastify";
 import prisma from "../../config/prisma";
 import type { GetTransactionsQuery } from "../../schemas/transaction.schema";
 import type { TrasactionFilter } from "../../types/transaction.type";
+
+
 dayjs.extend(utc);
+
+
 const getTransactions = async (
   request: FastifyRequest<{ Querystring: GetTransactionsQuery }>,
   reply: FastifyReply,
 ): Promise<void> => {
-  const userId = "sdfsdff45a346AF4";
+  // const userId = "sdfsdff45a346AF4";
+  const userId = request.userId;
 
   if (!userId) {
     reply.status(401).send({ error: "Usuario não autenticado" });

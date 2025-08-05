@@ -1,15 +1,21 @@
+import cors from "@fastify/cors";
 import Fastify from "fastify";
 import type { FastifyInstance } from "fastify";
-import routes from "./routes/index";
 import { env } from "./config/env";
+import routes from "./routes/index";
 
 const app: FastifyInstance = Fastify({
   logger: {
-    level:env.NODE_ENV === "dev" ? "info" : "error",
+    level: env.NODE_ENV === "dev" ? "info" : "error",
   },
 });
 
-app.register(routes, { prefix: "api" });
+app.register(cors, {
+  origin: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"], // LIBERAR OS METODOS QUE A API VAI ACEITAR
+});
+
+app.register(routes, { prefix: "/api" });
 
 export default app;
 /*  

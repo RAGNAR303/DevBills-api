@@ -12,7 +12,8 @@ export const getTransactionsSummary = async (
   request: FastifyRequest<{ Querystring: GetTransactionsSummaryQuery }>,
   reply: FastifyReply,
 ): Promise<void> => {
-  const userId = "sdfsdff45a346AF4";
+  // const userId = "sdfsdff45a346AF4";
+  const userId = request.userId;
 
   if (!userId) {
     reply.status(401).send({ error: "Usuario não autenticado" });
@@ -83,7 +84,7 @@ export const getTransactionsSummary = async (
         .sort((a, b) => b.amount - a.amount),
     };
 
-    console.log({ totalExpenses, totalIncomes, groupedExpenses });
+    
     reply.send(summary);
   } catch (err) {
     request.log.error("Erro ao trazer transações", err);
