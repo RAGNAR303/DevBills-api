@@ -50,6 +50,8 @@ export const deleteTransactionSchema = z.object({
   }),
 });
 
+
+
 export type GetHistoricalTransactionsQuery = z.infer<typeof getHistoricalTransactionsSchema>;
 export type GetTransactionsQuery = z.infer<typeof getTransactionSchema>;
 export type GetTransactionsSummaryQuery = z.infer<typeof getTransactionsSummarySchema>;
